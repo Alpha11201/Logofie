@@ -6,7 +6,7 @@ const { createClient } = require("@supabase/supabase-js");
 require("dotenv").config();
 
 const app = express();
-const PORT = process.env.PORT || 5002;
+const PORT = process.env.PORT || process.env.RAILWAY_PORT || 5002;
 
 // Configuration Supabase - FENIGAMA DW
 const supabaseUrl = process.env.SUPABASE_URL;
