@@ -9,8 +9,8 @@ const app = express();
 const PORT = process.env.PORT || 5002;
 
 // Configuration Supabase - FENIGAMA DW
-const supabaseUrl = process.env.SUPABASE_URL || "https://urxjwxfcpdvkxihmrgyr.supabase.co";
-const supabaseKey = process.env.SUPABASE_KEY || process.env.SUPABASE_ANON_KEY || "sb_publishable_g8st5Gkuf7goBrl9ozqmRQ_G23Brr5u";
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_KEY || process.env.SUPABASE_ANON_KEY;
 
 console.log("🤖 Initialisation de Logofiè...");
 console.log("🔗 Supabase URL:", supabaseUrl ? "✅ Présent" : "❌ Manquant");
