@@ -4,8 +4,7 @@
   "description": "Logofiè - Plateforme e-commerce avec IA de recommandations",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "node index.js"
+    "start": "node index.js"
   },
   "dependencies": {
     "express": "^4.18.2",
@@ -16,18 +15,7 @@
   "engines": {
     "node": ">=20.0.0"
   },
-  "keywords": [
-    "logofie",
-    "ecommerce",
-    "artificial-intelligence",
-    "recommendations",
-    "supabase",
-    "railway"
-  ],
+  "keywords": ["logofie", "ecommerce", "ai", "supabase"],
   "author": "Logofiè Team",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Alpha11201/logofie.git"
-  }
+  "license": "MIT"
 }
