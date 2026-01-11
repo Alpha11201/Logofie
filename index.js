@@ -1,5 +1,5 @@
 // ============================================
-// LOGOFIÈ - PLATEFORME E-COMMERCE AVEC IA - VERSION CORRIGÉE RAILWAY
+// LOGOFIÈ - PLATEFORME E-COMMERCE AVEC IA - VERSION URGENTE POUR RAILWAY
 // ============================================
 const express = require("express");
 const { createClient } = require("@supabase/supabase-js");
@@ -7,123 +7,99 @@ require("dotenv").config();
 
 const app = express();
 
-// CORRECTION CRITIQUE : Gestion des ports Railway
+// CORRECTION CRITIQUE : Railway utilise PORT ou RAILWAY_PORT
 const PORT = process.env.PORT || process.env.RAILWAY_PORT || 5002;
 
 console.log("=".repeat(70));
-console.log("🤖 LOGOFIÈ - Initialisation...");
-console.log("📍 Port configuré:", PORT);
-console.log("🌐 Environnement:", process.env.NODE_ENV || "development");
+console.log("🚀 DÉMARRAGE URGENT LOGOFIÈ POUR RAILWAY");
+console.log("📍 Port détecté:", PORT);
+console.log("🔧 Variables disponibles:", Object.keys(process.env).filter(k => k.includes('RAILWAY') || k.includes('PORT') || k.includes('SUPABASE')));
 
-// Configuration Supabase - FENIGAMA DW
-const supabaseUrl = process.env.SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_KEY || process.env.SUPABASE_ANON_KEY;
+// CORRECTION : Route racine IMMÉDIATE pour Railway
+app.get("/", (req, res) => {
+  res.send(`
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <title>Logofiè - Chargement...</title>
+      <style>
+        body {
+          font-family: Arial, sans-serif;
+          text-align: center;
+          padding: 50px;
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          color: white;
+          min-height: 100vh;
+          margin: 0;
+        }
+        .container {
+          max-width: 600px;
+          margin: 0 auto;
+          background: rgba(255, 255, 255, 0.1);
+          padding: 40px;
+          border-radius: 20px;
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        h1 { font-size: 3em; margin-bottom: 20px; }
+        .spinner {
+          border: 4px solid rgba(255, 255, 255, 0.3);
+          border-radius: 50%;
+          border-top: 4px solid white;
+          width: 40px;
+          height: 40px;
+          animation: spin 1s linear infinite;
+          margin: 20px auto;
+        }
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+      </style>
+      <script>
+        // Redirection après 2 secondes
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
+      </script>
+    </head>
+    <body>
+      <div class="container">
+        <h1>🤖 Logofiè</h1>
+        <div class="spinner"></div>
+        <p>Initialisation de la plateforme IA...</p>
+        <p style="font-size: 0.9em; opacity: 0.8;">Port: ${PORT}</p>
+        <p style="font-size: 0.9em; opacity: 0.8;">Railway déploiement en cours</p>
+      </div>
+    </body>
+    </html>
+  `);
+});
 
-console.log("🔗 Supabase URL:", supabaseUrl ? "✅ Présent" : "❌ Manquant");
-console.log("🔑 Supabase Key:", supabaseKey ? "✅ Présent" : "❌ Manquant");
-
-let supabase;
-if (supabaseUrl && supabaseKey) {
-  try {
-    supabase = createClient(supabaseUrl, supabaseKey, {
-      auth: { persistSession: false }
-    });
-    console.log("✅ Client Supabase initialisé avec succès");
-  } catch (error) {
-    console.error("❌ Erreur Supabase:", error.message);
-  }
-} else {
-  console.log("⚠️  Supabase non configuré - Configurez les variables dans Railway");
-}
-
-// Middleware
+// CORRECTION : Middleware APRÈS la route racine
 app.use(require("cors")());
 app.use(express.json());
 
-// ============================================
-// IA DE RECOMMANDATIONS LOGOFIÈ
-// ============================================
+// Configuration Supabase - AVEC VALEURS PAR DÉFAUT POUR RAILWAY
+const supabaseUrl = process.env.SUPABASE_URL || "https://urxjwxfcpdvkxihmrgyr.supabase.co";
+const supabaseKey = process.env.SUPABASE_KEY || process.env.SUPABASE_ANON_KEY || "sb_publishable_g8st5Gkuf7goBrl9ozqmRQ_G23Brr5u";
 
-// API d'analyse comportementale IA
-app.get("/api/logofie/ai/analyze", async (req, res) => {
-  const aiAnalysis = {
-    platform: "Logofiè AI Engine",
-    version: "2026.1.0",
-    analysis_timestamp: new Date().toISOString(),
-    
-    capabilities: {
-      behavioral_analysis: true,
-      predictive_recommendations: true,
-      customer_segmentation: true,
-      purchase_prediction: true,
-      sentiment_analysis: true,
-      trend_detection: true
-    },
-    
-    current_insights: {
-      top_categories: [],
-      trending_products: [],
-      customer_preferences: [],
-      market_trends: [],
-      personalized_suggestions: []
-    },
-    
-    performance: {
-      accuracy: "92.5%",
-      processing_time: "48ms",
-      models_active: 3,
-      training_data: "1.2M interactions"
-    }
-  };
-  
-  res.json({ success: true, ai: aiAnalysis });
-});
+console.log("🤖 Configuration Supabase...");
+console.log("🔗 URL:", supabaseUrl);
+console.log("🔑 Clé présente:", !!supabaseKey);
 
-// API de recommandations personnalisées
-app.post("/api/logofie/ai/recommend", async (req, res) => {
-  const { customer_id, history, preferences } = req.body;
-  
-  const recommendations = {
-    personalized: [
-      {
-        id: "rec_001",
-        type: "based_on_history",
-        confidence: 0.87,
-        products: []
-      },
-      {
-        id: "rec_002", 
-        type: "trending_similar",
-        confidence: 0.79,
-        products: []
-      },
-      {
-        id: "rec_003",
-        type: "complementary_items",
-        confidence: 0.82,
-        products: []
-      }
-    ],
-    
-    contextual: {
-      time_of_day: "afternoon",
-      season: "current",
-      location_based: false,
-      occasion: null
-    },
-    
-    ai_metadata: {
-      model: "logofie_rec_v3",
-      inference_time: "32ms",
-      factors_considered: ["history", "trends", "similarity", "timing"]
-    }
-  };
-  
-  res.json({ success: true, recommendations });
-});
+let supabase;
+try {
+  supabase = createClient(supabaseUrl, supabaseKey, {
+    auth: { persistSession: false }
+  });
+  console.log("✅ Client Supabase initialisé avec succès");
+} catch (error) {
+  console.error("❌ Erreur Supabase:", error.message);
+}
 
 // ============================================
-// HEALTH CHECK - IMPORTANT POUR RAILWAY
+// HEALTH CHECK - TRÈS IMPORTANT POUR RAILWAY
 // ============================================
 
 app.get("/health", (req, res) => {
@@ -134,52 +110,26 @@ app.get("/health", (req, res) => {
     version: "2026.1.0",
     timestamp: new Date().toISOString(),
     port: PORT,
-    supabase: supabase ? "connected" : "not_configured"
-  });
-});
-
-app.get("/api/logofie/health", (req, res) => {
-  res.json({
-    success: true,
-    platform: "Logofiè AI Commerce Platform",
-    version: "2026.1.0",
-    status: "operational",
-    timestamp: new Date().toISOString(),
-    supabase_connected: !!supabase,
-    ai_capabilities: {
-      recommendations: true,
-      predictive_analytics: true,
-      customer_segmentation: true,
-      fraud_detection: true,
-      sentiment_analysis: true
-    },
-    integrations: {
-      bafingpay_baas: true,
-      fenigama_crm: true,
-      payment_gateways: ["visa", "mastercard", "orange_money", "wave", "bank_transfer"]
+    environment: process.env.NODE_ENV || "development",
+    railway: process.env.RAILWAY_ENVIRONMENT ? true : false,
+    supabase: supabase ? "connected" : "not_configured",
+    endpoints: {
+      home: "/",
+      api_health: "/api/logofie/health",
+      api_ai: "/api/logofie/ai/analyze",
+      railway_health: "/health"
     }
   });
 });
 
 // ============================================
-// INTERFACE LOGOFIÈ AVEC IA INTÉGRÉE - VERSION OPTIMISÉE
+// ROUTE COMPLÈTE APRÈS INITIALISATION
 // ============================================
 
-// Fonction pour obtenir l'URL de base
-function getBaseUrl() {
-  if (process.env.RAILWAY_STATIC_URL) {
-    return process.env.RAILWAY_STATIC_URL;
-  }
-  if (process.env.NODE_ENV === 'production') {
-    return `https://harmonious-creativity.up.railway.app`;
-  }
-  return `http://localhost:${PORT}`;
-}
-
-const BASE_URL = getBaseUrl();
-
-app.get("/", (req, res) => {
+// Route pour l'interface complète (accessible après chargement)
+app.get("/app", (req, res) => {
   const isSupabaseConnected = supabase ? '✅' : '❌';
+  const baseUrl = `https://harmonious-creativity.up.railway.app`;
   
   res.send(`
   <!DOCTYPE html>
@@ -194,9 +144,6 @@ app.get("/", (req, res) => {
     
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- AOS Animations -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
       :root {
@@ -286,85 +233,28 @@ app.get("/", (req, res) => {
         letter-spacing: -1px;
       }
       
-      .logo-tagline {
-        font-size: 1rem;
-        color: var(--text-secondary);
-        margin-left: 60px;
+      /* Status Indicators */
+      .status-indicator {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.875rem;
         font-weight: 500;
+        margin: 0.5rem;
       }
       
-      /* Hero Content */
-      .hero-content {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        min-height: 70vh;
-        gap: 4rem;
+      .status-online {
+        background: rgba(16, 185, 129, 0.1);
+        border: 1px solid rgba(16, 185, 129, 0.2);
+        color: var(--secondary);
       }
       
-      .hero-text {
-        flex: 1;
-        min-width: 300px;
-      }
-      
-      .hero-visual {
-        flex: 1;
-        min-width: 300px;
-        text-align: center;
-      }
-      
-      /* AI Brain Animation */
-      .ai-brain {
-        position: relative;
-        width: 300px;
-        height: 300px;
-        margin: 0 auto;
-      }
-      
-      .brain-circle {
-        position: absolute;
-        border-radius: 50%;
-        animation: pulse 3s ease-in-out infinite;
-      }
-      
-      .brain-circle-1 {
-        width: 300px;
-        height: 300px;
-        border: 2px solid rgba(139, 92, 246, 0.3);
-      }
-      
-      .brain-circle-2 {
-        width: 250px;
-        height: 250px;
-        border: 2px solid rgba(16, 185, 129, 0.3);
-        top: 25px;
-        left: 25px;
-        animation-delay: 0.5s;
-      }
-      
-      .brain-circle-3 {
-        width: 200px;
-        height: 200px;
-        border: 2px solid rgba(245, 158, 11, 0.3);
-        top: 50px;
-        left: 50px;
-        animation-delay: 1s;
-      }
-      
-      .brain-center {
-        position: absolute;
-        width: 150px;
-        height: 150px;
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
-        border-radius: 50%;
-        top: 75px;
-        left: 75px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 3rem;
-        color: white;
-        box-shadow: 0 0 50px rgba(139, 92, 246, 0.5);
+      .status-warning {
+        background: rgba(245, 158, 11, 0.1);
+        border: 1px solid rgba(245, 158, 11, 0.2);
+        color: var(--accent);
       }
       
       /* Buttons */
@@ -390,46 +280,6 @@ app.get("/", (req, res) => {
       .btn-primary:hover {
         transform: translateY(-3px);
         box-shadow: 0 10px 25px rgba(139, 92, 246, 0.4);
-      }
-      
-      .btn-outline {
-        background: transparent;
-        border: 2px solid var(--primary);
-        color: var(--primary);
-      }
-      
-      .btn-outline:hover {
-        background: rgba(139, 92, 246, 0.1);
-        transform: translateY(-3px);
-      }
-      
-      /* Status Indicators */
-      .status-indicator {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 0.5rem 1rem;
-        border-radius: 20px;
-        font-size: 0.875rem;
-        font-weight: 500;
-      }
-      
-      .status-online {
-        background: rgba(16, 185, 129, 0.1);
-        border: 1px solid rgba(16, 185, 129, 0.2);
-        color: var(--secondary);
-      }
-      
-      .status-warning {
-        background: rgba(245, 158, 11, 0.1);
-        border: 1px solid rgba(245, 158, 11, 0.2);
-        color: var(--accent);
-      }
-      
-      .status-error {
-        background: rgba(239, 68, 68, 0.1);
-        border: 1px solid rgba(239, 68, 68, 0.2);
-        color: #ef4444;
       }
       
       /* Dashboard */
@@ -463,18 +313,6 @@ app.get("/", (req, res) => {
         -webkit-text-fill-color: transparent;
         margin: 0.5rem 0;
       }
-      
-      /* Animations */
-      @keyframes pulse {
-        0%, 100% {
-          transform: scale(1);
-          opacity: 0.5;
-        }
-        50% {
-          transform: scale(1.05);
-          opacity: 1;
-        }
-      }
     </style>
   </head>
   <body>
@@ -491,10 +329,10 @@ app.get("/", (req, res) => {
         </div>
 
         <!-- System Status -->
-        <div style="display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap;">
+        <div style="margin-bottom: 2rem;">
           <div class="status-indicator status-online">
-            <i class="fas fa-circle" style="font-size: 0.5rem;"></i>
-            <span>Port: ${PORT}</span>
+            <i class="fas fa-check-circle"></i>
+            <span>✅ Logofiè est en ligne</span>
           </div>
           <div class="status-indicator ${isSupabaseConnected === '✅' ? 'status-online' : 'status-warning'}">
             <i class="fas fa-database"></i>
@@ -502,161 +340,86 @@ app.get("/", (req, res) => {
           </div>
           <div class="status-indicator status-online">
             <i class="fas fa-rocket"></i>
-            <span>Railway: Déployé</span>
+            <span>Railway: Déployé avec succès</span>
+          </div>
+          <div class="status-indicator status-online">
+            <i class="fas fa-server"></i>
+            <span>Port: ${PORT}</span>
           </div>
         </div>
 
         <!-- Hero Content -->
-        <div class="hero-content">
-          <div class="hero-text">
-            <h1 style="font-size: 3.5rem; font-weight: 800; line-height: 1.1; margin-bottom: 1.5rem;">
-              L'<span style="background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">IA</span> qui révolutionne votre e-commerce
-            </h1>
-            <p style="font-size: 1.25rem; color: var(--text-secondary); margin-bottom: 2.5rem; line-height: 1.6;">
-              Logofiè analyse en temps réel le comportement d'achat et fournit des recommandations personnalisées pour augmenter vos conversions de 40%.
-            </p>
-            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-              <button class="btn-logofie btn-primary" onclick="launchAIDemo()">
-                <i class="fas fa-brain"></i>
-                Tester l'IA
-              </button>
-              <button class="btn-logofie btn-outline" onclick="testAPI()">
-                <i class="fas fa-code"></i>
-                Tester l'API
-              </button>
-              <a href="${BASE_URL}/api/logofie/health" target="_blank" class="btn-logofie btn-outline">
-                <i class="fas fa-heartbeat"></i>
-                Vérifier santé
-              </a>
+        <div style="text-align: center; padding: 4rem 0;">
+          <h1 style="font-size: 3.5rem; font-weight: 800; line-height: 1.1; margin-bottom: 1.5rem;">
+            🎉 <span style="background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Logofiè est en ligne !</span>
+          </h1>
+          <p style="font-size: 1.25rem; color: var(--text-secondary); margin-bottom: 2.5rem; line-height: 1.6; max-width: 800px; margin-left: auto; margin-right: auto;">
+            Votre plateforme e-commerce avec intelligence artificielle est maintenant déployée sur Railway et connectée à Supabase.
+          </p>
+          
+          <div class="dashboard-metrics">
+            <div class="metric-preview">
+              <div style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Statut</div>
+              <div class="metric-value">✅</div>
+              <div style="font-size: 0.75rem; color: var(--text-secondary);">Opérationnel</div>
+            </div>
+            
+            <div class="metric-preview">
+              <div style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Base de données</div>
+              <div class="metric-value">${isSupabaseConnected}</div>
+              <div style="font-size: 0.75rem; color: var(--text-secondary);">Supabase</div>
+            </div>
+            
+            <div class="metric-preview">
+              <div style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Hébergement</div>
+              <div class="metric-value">🚀</div>
+              <div style="font-size: 0.75rem; color: var(--text-secondary);">Railway</div>
+            </div>
+            
+            <div class="metric-preview">
+              <div style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Version</div>
+              <div class="metric-value">2026.1</div>
+              <div style="font-size: 0.75rem; color: var(--text-secondary);">Logofiè IA</div>
             </div>
           </div>
           
-          <div class="hero-visual">
-            <div class="ai-brain">
-              <div class="brain-circle brain-circle-1"></div>
-              <div class="brain-circle brain-circle-2"></div>
-              <div class="brain-circle brain-circle-3"></div>
-              <div class="brain-center">
-                <i class="fas fa-robot"></i>
-              </div>
-            </div>
+          <div style="margin-top: 3rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+            <a href="${baseUrl}/health" target="_blank" class="btn-logofie btn-primary">
+              <i class="fas fa-heartbeat"></i>
+              Tester l'API Health
+            </a>
+            <a href="${baseUrl}/api/logofie/health" target="_blank" class="btn-logofie btn-primary">
+              <i class="fas fa-code"></i>
+              Voir l'API Logofiè
+            </a>
+            <a href="https://github.com/Alpha11201/logofie" target="_blank" class="btn-logofie" style="background: transparent; border: 2px solid var(--primary); color: var(--primary);">
+              <i class="fab fa-github"></i>
+              Code source
+            </a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Main Content -->
-    <main class="container">
-      <!-- Dashboard -->
-      <section class="dashboard-preview">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
-          <div>
-            <h3 style="font-size: 1.75rem; font-weight: 700;">Dashboard Logofiè</h3>
-            <p style="color: var(--text-secondary);">Analytics en temps réel et insights IA</p>
-          </div>
-        </div>
-        
-        <div class="dashboard-metrics">
-          <div class="metric-preview">
-            <div style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Statut Serveur</div>
-            <div class="metric-value">✅</div>
-            <div style="font-size: 0.75rem; color: var(--text-secondary);">En ligne</div>
-          </div>
-          
-          <div class="metric-preview">
-            <div style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Connexion DB</div>
-            <div class="metric-value">${isSupabaseConnected}</div>
-            <div style="font-size: 0.75rem; color: var(--text-secondary);">Supabase</div>
-          </div>
-          
-          <div class="metric-preview">
-            <div style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Port</div>
-            <div class="metric-value">${PORT}</div>
-            <div style="font-size: 0.75rem; color: var(--text-secondary);">Actif</div>
-          </div>
-          
-          <div class="metric-preview">
-            <div style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Version</div>
-            <div class="metric-value">2026.1</div>
-            <div style="font-size: 0.75rem; color: var(--text-secondary);">Logofiè IA</div>
-          </div>
-        </div>
-        
-        <!-- API Links -->
-        <div style="margin-top: 2rem;">
-          <h4 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">🔗 API Endpoints</h4>
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
-            <a href="${BASE_URL}/api/logofie/health" target="_blank" style="background: var(--card-bg); padding: 1rem; border-radius: 12px; border: 1px solid var(--card-border); text-decoration: none; color: var(--text-primary); transition: all 0.3s;" onmouseover="this.style.borderColor='var(--primary)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='var(--card-border)'; this.style.transform='translateY(0)'">
-              <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 0.5rem;">
-                <i class="fas fa-heartbeat" style="color: var(--secondary);"></i>
-                <span style="font-weight: 600;">GET /api/logofie/health</span>
-              </div>
-              <div style="font-size: 0.875rem; color: var(--text-secondary);">Vérifier la santé du système</div>
-            </a>
-            
-            <a href="${BASE_URL}/api/logofie/ai/analyze" target="_blank" style="background: var(--card-bg); padding: 1rem; border-radius: 12px; border: 1px solid var(--card-border); text-decoration: none; color: var(--text-primary); transition: all 0.3s;" onmouseover="this.style.borderColor='var(--primary)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='var(--card-border)'; this.style.transform='translateY(0)'">
-              <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 0.5rem;">
-                <i class="fas fa-brain" style="color: var(--primary);"></i>
-                <span style="font-weight: 600;">GET /api/logofie/ai/analyze</span>
-              </div>
-              <div style="font-size: 0.875rem; color: var(--text-secondary);">Analyse comportementale IA</div>
-            </a>
-            
-            <a href="${BASE_URL}/health" target="_blank" style="background: var(--card-bg); padding: 1rem; border-radius: 12px; border: 1px solid var(--card-border); text-decoration: none; color: var(--text-primary); transition: all 0.3s;" onmouseover="this.style.borderColor='var(--primary)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='var(--card-border)'; this.style.transform='translateY(0)'">
-              <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 0.5rem;">
-                <i class="fas fa-check-circle" style="color: var(--accent);"></i>
-                <span style="font-weight: 600;">GET /health</span>
-              </div>
-              <div style="font-size: 0.875rem; color: var(--text-secondary);">Health check Railway</div>
-            </a>
-          </div>
-        </div>
-      </section>
-    </main>
-
     <!-- Footer -->
     <footer style="padding: 3rem 2rem; border-top: 1px solid var(--card-border); margin-top: 4rem; background: var(--darker);">
-      <div style="max-width: 1200px; margin: 0 auto;">
-        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem;">
-          <div>
-            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 1rem;">
-              <div class="logo-icon" style="width: 40px; height: 40px; font-size: 1.25rem;">L</div>
-              <div class="logo-text" style="font-size: 1.75rem;">Logofiè</div>
-            </div>
-            <p style="color: var(--text-secondary);">Plateforme e-commerce avec IA de recommandations • 2026</p>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; margin-top: 0.5rem;">
-              <i class="fas fa-server"></i> URL: ${BASE_URL} • 
-              <i class="fas fa-database"></i> Supabase: ${isSupabaseConnected}
-            </p>
-          </div>
-        </div>
+      <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
+        <p style="color: var(--text-secondary);">
+          <strong>Logofiè</strong> - Plateforme e-commerce avec IA • Déployé sur Railway • 2026
+        </p>
+        <p style="color: var(--text-secondary); font-size: 0.875rem; margin-top: 1rem;">
+          <i class="fas fa-link"></i> ${baseUrl} • 
+          <i class="fas fa-database"></i> Supabase: ${isSupabaseConnected} • 
+          <i class="fas fa-server"></i> Port: ${PORT}
+        </p>
       </div>
     </footer>
 
-    <!-- JavaScript -->
     <script>
-      function launchAIDemo() {
-        alert('🎯 Démonstration IA Logofiè\\n\\nCette fonctionnalité sera disponible dans la version complète.');
-      }
-      
-      async function testAPI() {
-        try {
-          const response = await fetch('${BASE_URL}/api/logofie/health');
-          const data = await response.json();
-          alert('✅ API Logofiè fonctionnelle!\\n\\n' + JSON.stringify(data, null, 2));
-        } catch (error) {
-          alert('❌ Erreur API: ' + error.message);
-        }
-      }
-      
-      // Initialize brain animation
-      document.addEventListener('DOMContentLoaded', function() {
-        const circles = document.querySelectorAll('.brain-circle');
-        circles.forEach((circle, index) => {
-          circle.style.animationDelay = \`\${index * 0.5}s\`;
-        });
-        console.log('🤖 Logofiè initialisé avec succès');
-      });
+      console.log('🎉 Logofiè chargé avec succès!');
+      console.log('URL:', '${baseUrl}');
+      console.log('Port:', ${PORT});
+      console.log('Supabase:', '${isSupabaseConnected}');
     </script>
   </body>
   </html>
@@ -664,32 +427,93 @@ app.get("/", (req, res) => {
 });
 
 // ============================================
-// DÉMARRAGE LOGOFIÈ - AVEC GESTION D'ERREURS
+// API ENDPOINTS LOGOFIÈ
 // ============================================
 
-const server = app.listen(PORT, () => {
+app.get("/api/logofie/health", (req, res) => {
+  res.json({
+    success: true,
+    platform: "Logofiè AI Commerce Platform",
+    version: "2026.1.0",
+    status: "operational",
+    timestamp: new Date().toISOString(),
+    environment: process.env.NODE_ENV || "development",
+    railway: {
+      environment: process.env.RAILWAY_ENVIRONMENT,
+      service: process.env.RAILWAY_SERVICE_NAME,
+      url: "https://harmonious-creativity.up.railway.app"
+    },
+    supabase: {
+      connected: !!supabase,
+      url: supabaseUrl ? "configured" : "not_configured"
+    },
+    endpoints: {
+      home: "/",
+      app: "/app",
+      health: "/health",
+      api_health: "/api/logofie/health",
+      api_ai: "/api/logofie/ai/analyze"
+    }
+  });
+});
+
+app.get("/api/logofie/ai/analyze", async (req, res) => {
+  res.json({
+    success: true,
+    ai: {
+      platform: "Logofiè AI Engine",
+      version: "2026.1.0",
+      status: "active",
+      capabilities: ["behavioral_analysis", "predictive_recommendations", "fraud_detection"],
+      timestamp: new Date().toISOString()
+    }
+  });
+});
+
+// ============================================
+// DÉMARRAGE ET GESTION D'ERREURS
+// ============================================
+
+const server = app.listen(PORT, '0.0.0.0', () => {
   console.log("=".repeat(70));
-  console.log("🚀 LOGOFIÈ DÉMARRÉ AVEC SUCCÈS !");
+  console.log("🎉 LOGOFIÈ DÉMARRÉ AVEC SUCCÈS SUR RAILWAY !");
   console.log("=".repeat(70));
   console.log(`📍 Port: ${PORT}`);
-  console.log(`🌐 Interface: ${BASE_URL}`);
-  console.log(`🔗 API Health: ${BASE_URL}/api/logofie/health`);
-  console.log(`🧠 IA API: ${BASE_URL}/api/logofie/ai/analyze`);
-  console.log(`🏥 Railway Health: ${BASE_URL}/health`);
+  console.log(`🌐 Interface: https://harmonious-creativity.up.railway.app`);
+  console.log(`📱 App: https://harmonious-creativity.up.railway.app/app`);
+  console.log(`🔗 API Health: https://harmonious-creativity.up.railway.app/api/logofie/health`);
+  console.log(`🏥 Railway Health: https://harmonious-creativity.up.railway.app/health`);
   console.log("");
   console.log("📊 CONFIGURATION:");
-  console.log(`   • Supabase: ${supabase ? "✅ Connecté" : "❌ Non configuré"}`);
+  console.log(`   • Supabase: ${supabase ? "✅ Connecté" : "⚠️  Utilisation valeur par défaut"}`);
   console.log(`   • Environnement: ${process.env.NODE_ENV || "development"}`);
-  console.log(`   • Railway: ${process.env.RAILWAY_ENVIRONMENT ? "✅" : "❌"}`);
+  console.log(`   • Railway: ${process.env.RAILWAY_ENVIRONMENT ? "✅ Détecté" : "❌ Non détecté"}`);
+  console.log("");
+  console.log("🚀 PRÊT À UTILISER !");
   console.log("=".repeat(70));
 });
 
-// Gestion des erreurs
+// Gestion robuste des erreurs
 server.on('error', (error) => {
+  console.error("=".repeat(70));
+  console.error("❌ ERREUR CRITIQUE LORS DU DÉMARRAGE");
+  console.error("=".repeat(70));
+  console.error("Message:", error.message);
+  console.error("Code:", error.code);
+  
   if (error.code === 'EADDRINUSE') {
-    console.error(`❌ Le port ${PORT} est déjà utilisé. Essayez un autre port.`);
-    console.log("💡 Solution: Changez la variable PORT dans Railway Variables");
-  } else {
-    console.error('❌ Erreur serveur:', error.message);
+    console.error(`💡 Le port ${PORT} est déjà utilisé.`);
+    console.error("Solution: Changez la variable PORT dans Railway");
   }
+  
+  process.exit(1);
+});
+
+// Gestion des signaux
+process.on('SIGTERM', () => {
+  console.log('📴 Réception du signal SIGTERM, arrêt gracieux...');
+  server.close(() => {
+    console.log('✅ Serveur arrêté avec succès');
+    process.exit(0);
+  });
 });
