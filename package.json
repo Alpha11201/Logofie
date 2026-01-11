@@ -9,7 +9,7 @@
     "test": "jest",
     "lint": "eslint .",
     "docker:build": "docker build -t logofie-marketplace .",
-    "docker:run": "docker run -p 5003:5003 logofie-marketplace"
+    "docker:run": "docker run -p 5002:5002 logofie-marketplace"
   },
   "dependencies": {
     "express": "^4.18.2",
