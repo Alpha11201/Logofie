@@ -1,6 +1,6 @@
-﻿{
+{
   "name": "logofie",
-  "version": "2026.01.1",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -8,8 +8,8 @@
     "start": "next start"
   },
   "dependencies": {
-    "next": "^16.1.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "next": "15.0.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
   }
 }
