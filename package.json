@@ -2,55 +2,14 @@
   "name": "logofie",
   "version": "2026.01.1",
   "private": true,
-  "description": "Logofiè Marketplace - Frontend Next.js 2026",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "build:analyze": "ANALYZE=true next build",
-    "test:e2e": "playwright test",
-    "test:performance": "lighthouse http://localhost:3000 --output json"
+    "start": "next start"
   },
   "dependencies": {
     "next": "^16.1.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "web-vitals": "^3.5.0",
-    "@tanstack/react-query": "^5.0.0",
-    "zustand": "^4.4.0",
-    "jotai": "^2.0.0",
-    "@radix-ui/react-slot": "^1.0.2",
-    "class-variance-authority": "^0.7.0",
-    "clsx": "^2.0.0",
-    "tailwind-merge": "^2.0.0",
-    "lucide-react": "^0.344.0"
-  },
-  "devDependencies": {
-    "@types/node": "^20.0.0",
-    "@types/react": "^18.2.0",
-    "@types/react-dom": "^18.2.0",
-    "typescript": "^5.0.0",
-    "tailwindcss": "^4.0.0",
-    "@tailwindcss/vite": "^4.0.0",
-    "@types/web-vitals": "^3.3.0",
-    "@playwright/test": "^1.40.0",
-    "lighthouse": "^11.0.0",
-    "eslint": "^8.55.0",
-    "eslint-config-next": "^15.0.0"
-  },
-  "engines": {
-    "node": ">=20.0.0",
-    "npm": ">=10.0.0"
-  },
-  "keywords": [
-    "ecommerce",
-    "marketplace",
-    "nextjs",
-    "react",
-    "typescript",
-    "2026"
-  ],
-  "author": "Logofiè Team",
-  "license": "MIT"
+    "react-dom": "^18.2.0"
+  }
 }
