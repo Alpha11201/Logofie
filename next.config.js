@@ -1,9 +1,9 @@
-﻿/** @type {import('next').NextConfig} */
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   experimental: {
-    cacheComponents: true, // PPR activé
-    reactCompiler: true,   // React Compiler
+    cacheComponents: true,
+    reactCompiler: true,
   },
   images: {
     domains: ['localhost'],
