@@ -1,5 +1,3 @@
-# COPIE SEULEMENT CETTE COMMANDE, PAS LE PROMPT
-$json = '{
   "name": "logofie",
   "version": "2026.01.1",
   "private": true,
